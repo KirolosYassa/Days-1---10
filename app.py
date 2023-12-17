@@ -88,4 +88,43 @@ def day_4():
         print("You Win!")
 
     
-day_4()
+
+def day_5():
+    
+    password_list = []
+    
+    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N","O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    symbols = ["{", "}", "[", "]", "(", ")", "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "+", "=", ":", "'", ";", "/", "?", ">", "<", "|", "~", "`", ",", "."]
+    
+    print("Welcome to the PyPassword Generator!")
+    required_letters = int(input("""
+How many letters would you like in your password? 
+"""))
+    required_symbols = int(input("""
+How many symbols would you like? 
+"""))
+    required_numbers = int(input("""
+How many numbers would you like? 
+"""))
+    
+    for i in range(required_letters):
+        password_list.append(random.choice(letters))
+    
+    for i in range(required_symbols):
+        password_list.append(random.choice(symbols))
+    
+    
+    for i in range(required_numbers):
+        password_list.append(random.randint(0, 9))
+    
+    print(password_list)
+    random.shuffle(password_list)
+    print(password_list)
+    
+    password = ""
+    for letter in password_list:
+        password += str(letter) 
+        
+    print(f"Your password is: {password}")
+    
+day_5()
