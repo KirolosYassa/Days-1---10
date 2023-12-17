@@ -128,3 +128,5 @@ How many numbers would you like?
     print(f"Your password is: {password}")
     
 day_5()
+
+# Complete Day 5 for loops and generating strong passwords in 100 days of code Python
