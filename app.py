@@ -1,4 +1,7 @@
 import random
+import os
+from words_of_hangman import words
+from words_of_hangman import hangman_stages
 
 def day_1():
     city_name = input("""
@@ -12,6 +15,9 @@ What's your pet's name?
 
     print(f"Your band name could be {city_name} {pet_name}")
     
+    
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
 def day_2():
     total_bill = float(input("""Welcome to the tip calculator!
@@ -27,6 +33,9 @@ How many people to split the bill? """))
     payment_of_each_person = float(payment_of_each_person)
     print(f"Each person should pay: ${str(payment_of_each_person)} ")
     
+    
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
 def day_4():
     user_choice = int(input("""What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors. 
@@ -88,6 +97,9 @@ def day_4():
         print("You Win!")
 
     
+    
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
 def day_5():
     
@@ -127,6 +139,94 @@ How many numbers would you like?
         
     print(f"Your password is: {password}")
     
-day_5()
+    
+    
+# --------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 
+def day_7_hangman():
+    
+    hangman_word = random.choice(words)
+    
+    def make_word_like_list(word):
+        
+        word_list = []
+        
+        for letter in word:
+            word_list.append(letter)
+            
+        return word_list
+    
+    hangman_word = make_word_like_list(hangman_word)
+    stage_count = 0
+    guessed_word_list = [[] for i in range(len(hangman_word))]
+
+    checked_correct_letters = len(hangman_word)
+    
+    for i in range(len(hangman_word)):
+        guessed_word_list[i] = "_"
+    
+    def show_stage_and_guess_a_letter(stage_count, passed, wrong_guessed_letter, win_status):
+        os.system('cls')
+            
+        print("""
+    _                                             
+    | |                                            
+    | |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+    | '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+    | | | | (_| | | | | (_| | | | | | | (_| | | | |
+    |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                        __/ |                      
+                    |___/    
+    """)
+        
+        guessed_word = ""
+        if not passed:
+            print(f"You guessed {wrong_guessed_letter}, that's not in the word. You lose a life.")
+            
+
+        for i in range(len(hangman_word)):
+            guessed_word = guessed_word + guessed_word_list[i] + " "
+            
+        print(guessed_word)
+        
+        if win_status:
+            print("You Win.")
+
+        print(hangman_stages[stage_count])
+
+
+    passed = True
+    wrong_guessed_letter = ""
+    
+    while stage_count < 5:
+        
+        show_stage_and_guess_a_letter(stage_count= stage_count, passed = passed, wrong_guessed_letter = wrong_guessed_letter, win_status = False)
+        
+        guessed_letter = input("Guess a letter: ")
+        guessed_letter_status = False
+        
+        for i in range(len(hangman_word)):
+            if guessed_letter in hangman_word:
+                if guessed_letter in guessed_word_list:
+                    continue
+                
+                for i in range(len(hangman_word)):
+                    if guessed_letter == hangman_word[i]:
+                        guessed_word_list[i] = guessed_letter
+                
+                guessed_letter_status = True
+                checked_correct_letters -= 1
+                guessed_word_list[i] = hangman_word[i]
+        
+        if guessed_letter_status:
+            if checked_correct_letters == 0:
+                show_stage_and_guess_a_letter(stage_count= stage_count, passed = True, wrong_guessed_letter = "", win_status = True)
+                return
+        else:
+            show_stage_and_guess_a_letter(stage_count= stage_count, passed = False, wrong_guessed_letter = guessed_letter, win_status = False)
+            stage_count += 1
+        
+    
+day_7_hangman()
 # Complete Day 5 for loops and generating strong passwords in 100 days of code Python
