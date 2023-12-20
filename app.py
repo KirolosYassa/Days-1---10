@@ -214,10 +214,10 @@ def day_7_hangman():
                 for i in range(len(hangman_word)):
                     if guessed_letter == hangman_word[i]:
                         guessed_word_list[i] = guessed_letter
-                
+                        checked_correct_letters -= 1
+                        
                 guessed_letter_status = True
-                checked_correct_letters -= 1
-                guessed_word_list[i] = hangman_word[i]
+                # guessed_word_list[i] = hangman_word[i]
         
         if guessed_letter_status:
             if checked_correct_letters == 0:
