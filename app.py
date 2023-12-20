@@ -2,6 +2,9 @@ import random
 import os
 from words_of_hangman import words
 from words_of_hangman import hangman_stages
+from alphabet import letters
+from alphabet import big_letters
+from alphabet import small_letters
 
 def day_1():
     city_name = input("""
@@ -105,7 +108,6 @@ def day_5():
     
     password_list = []
     
-    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N","O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     symbols = ["{", "}", "[", "]", "(", ")", "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "+", "=", ":", "'", ";", "/", "?", ">", "<", "|", "~", "`", ",", "."]
     
     print("Welcome to the PyPassword Generator!")
@@ -140,6 +142,7 @@ How many numbers would you like?
     print(f"Your password is: {password}")
     
     
+# Complete Day 5 for loops and generating strong passwords in 100 days of code Python
     
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
@@ -228,5 +231,51 @@ def day_7_hangman():
             stage_count += 1
         
     
-day_7_hangman()
-# Complete Day 5 for loops and generating strong passwords in 100 days of code Python
+def day_8_caepher():
+    
+    resuming = True
+    
+    while resuming:
+        
+        message = 'g'
+        result_list = []
+        result = ""
+        
+        operation = input("""Type 'e' for encoding and 'd' to decrypt.
+    """)
+
+        message = input("""Type Your Message:
+    """)
+        
+        shift_number = int(input("""Type the shift number
+    """))
+        
+        for i in range(len(message)):
+            if message[i] in big_letters:
+                index_of_letter_in_message = big_letters.index(message[i])
+                if operation.capitalize() == 'E':
+                    result_list.append(big_letters[ ( index_of_letter_in_message + shift_number) % 26 ])
+                elif operation.capitalize() == 'D':
+                    result_list.append(big_letters[ ( index_of_letter_in_message - shift_number) % 26 ])
+            elif message[i] in small_letters:
+                index_of_letter_in_message = small_letters.index(message[i])
+                if operation.capitalize() == 'E':
+                    result_list.append(small_letters[ ( index_of_letter_in_message + shift_number) % 26 ])
+                elif operation.capitalize() == 'D':
+                    result_list.append(small_letters[ ( index_of_letter_in_message - shift_number) % 26 ])
+                    
+
+        for letter in result_list:
+            result += letter
+            
+        if operation.capitalize() == 'E':
+            print(f"Here is the encoded Result: {result}")
+        elif operation.capitalize() == 'D':
+            print(f"Here is the decrypted Result: {result}")
+
+        resume = input("Press 'y' to continue, otherwise press 'n' to exit")
+        if resume.capitalize() != 'Y':
+            resuming = False
+
+
+day_8_caepher()
