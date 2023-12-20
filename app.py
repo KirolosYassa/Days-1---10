@@ -278,4 +278,6 @@ def day_8_caepher():
             resuming = False
 
 
-day_8_caepher()
+def day_9_The_secret_Auction():
+    return
+day_9_The_secret_Auction()
