@@ -279,5 +279,44 @@ def day_8_caepher():
 
 
 def day_9_The_secret_Auction():
-    return
+    
+    all_bidders = {}
+    
+    is_continue = True
+    
+    print("shape of auction")
+    print("Welcome to the")
+    
+    
+    while is_continue:
+    
+        name = input("What is your name?")
+        
+        bid = int(input("What is your bid?"))
+        
+        all_bidders[name] = bid
+        
+        are_there_other_bidders = input("Are there any orher bidders, Type 'y' for Yes or 'n' for No?")
+        
+        if are_there_other_bidders.capitalize() != 'Y':
+            is_continue = False
+        os.system('cls')
+        
+    
+    bidders_values = []
+    
+    for key, value in all_bidders.items():
+        bidders_values.append(value)
+        
+    winner_bid_value = max(bidders_values)
+    index_of_winner_bid_value = bidders_values.index(winner_bid_value)
+    
+    i = 0
+    
+    for key, value in all_bidders.items():
+        if i == index_of_winner_bid_value:
+            print(f"The winner is {key} with a bid of ${value}")
+            break
+        i += 1
+
 day_9_The_secret_Auction()
