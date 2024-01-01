@@ -319,4 +319,70 @@ def day_9_The_secret_Auction():
             break
         i += 1
 
-day_9_The_secret_Auction()
+def calculator(first_number, operation, next_number):
+    if operation == "+":
+        return add(first_number, next_number)
+    elif operation == "-":
+        return subtract(first_number, next_number)
+    elif operation == "*":
+        return multiply(first_number, next_number)
+    elif operation == "/":
+        return divide(first_number, next_number)
+    
+def add(first_number, next_number):
+    return first_number + next_number
+
+def subtract(first_number, next_number):
+    return first_number - next_number
+
+def multiply(first_number, next_number):
+    return first_number * next_number
+
+def divide(first_number, next_number):
+    return first_number / next_number
+
+
+def display_calculator_and_return_and_display_result(first_number):
+    
+    operation = input("Pick an Operation: ")
+    
+    next_number = float(input("What is your next number?"))
+    
+    result = calculator(first_number=first_number, operation=operation, next_number=next_number)
+
+    print(f"{first_number} {operation} {next_number} = {result}")
+    
+    return result
+
+def day_10_Calculator():
+    os.system("cls")
+    is_continue = True
+    result = 0
+    
+    while is_continue:
+
+        first_number = float(input("What is your first number?\n+\n-\n*\n/"))
+
+        result = display_calculator_and_return_and_display_result(first_number=first_number)
+        
+        is_continue_with_the_same_result = True
+
+        is_cont = input(f"Type 'y' to continue calculating with {result} or 'n' to start a new operation, or 'exit to exit the calculator\n")
+       
+        while is_continue_with_the_same_result:
+            
+            if is_cont.capitalize() == "EXIT":        
+                is_continue = False
+                break
+            if is_cont.capitalize() == "N":
+                day_10_Calculator()
+            else:
+                first_number = result
+                result = display_calculator_and_return_and_display_result(first_number=first_number)
+            
+            is_cont = input(f"Type 'y' to continue calculating with {result} or 'n' to start a new operation, or 'exit to exit the calculator\n")
+            
+
+
+    
+day_10_Calculator()
